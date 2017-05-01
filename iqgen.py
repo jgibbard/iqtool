@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+
+#Copyright (c) 2017 James Gibbard
+
+#Generates an IQ data file based on provided parameters
+#Tested with python 2.7 and 3.6
+#Requires numpy and matplotlib
+
 import argparse
 from sys import byteorder
 import numpy as np
@@ -113,8 +121,7 @@ if __name__ == '__main__':
         elif args.format == 'int8':
             amplitude = ((2.0**7) - 1)
         else:
-            cliParser.error('Output format must be [int8 | int16 | int32]')
-          
+            cliParser.error('Output format must be [int8 | int16 | int32]')          
             
     #Set the output type
     if args.tone != None:    
