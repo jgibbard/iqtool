@@ -19,11 +19,11 @@ iqgen can generate files with three types of signal:
 3. Random signal **[-r]**.
 
 ### Sample rate
-* When generating the tone signal the sample rate can be specified using the **[-t FREQUENCY (Hz)]** option.
+* When generating the tone signal the sample rate can be specified using the **[-fs FREQUENCY (Hz)]** option.
 * By default the sample rate is set to 1 MHz.
 
 ### Data format
-* The output data type can be set to **[int8 | int16 | int32]** using the **[-f intX]** option.
+* The output data type can be set to **[int8 | int16 | int32 | float16 | float32 | float64]** using the **[-f DATAFORMAT]** option.
 * By default the output type is set to int16.
 
 ### Output amplitude
@@ -64,7 +64,7 @@ Usage: **python iqplot.py *filename***
 * By default all samples from the STARTSAMPLE to the end of the file will be plotted.
 
 ### Sample rate
-* When the sample rate can be specified using the **[-t FREQUENCY (Hz)]** option.
+* When the sample rate can be specified using the **[-fs FREQUENCY (Hz)]** option.
 * Setting the sample rate allows the the time and frequency axis labels to be correctly set.
 
 ### Data format

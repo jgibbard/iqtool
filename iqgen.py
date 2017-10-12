@@ -28,8 +28,8 @@ def generateTone(fs, toneFreq, numSamples, amplitude):
 def generateRandom(numSamples, amplitude):
     #Generate random data from both I and Q
     scale = int(amplitude)
-    realArray = np.random.randint(-scale, scale,numSamples)
-    imagArray = np.random.randint(-scale, scale,numSamples)
+    realArray = np.random.randint(-scale, scale + 1, numSamples)
+    imagArray = np.random.randint(-scale, scale + 1, numSamples)
     
     return realArray + 1j * imagArray
 
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     cliParser.add_argument('-o', '--filename', type=str, help='output filename')
     
     cliParser.add_argument('-f', '--format', type=str, 
-        help='Output format [int8 | int16 | int32] (default=int16)', 
+        help='Output format [int8 | int16 | int32 | float16 | float32 | float64] (default=int16)', 
         default='int16')
                         
     cliParser.add_argument('-a', '--amplitude', type=float,
@@ -120,8 +120,10 @@ if __name__ == '__main__':
             amplitude = ((2.0**31) - 1)
         elif args.format == 'int8':
             amplitude = ((2.0**7) - 1)
+        elif args.format == 'float16' or args.format == 'float32' or args.format == 'float64':
+            amplitude = 1.0
         else:
-            cliParser.error('Output format must be [int8 | int16 | int32]')          
+            cliParser.error('Output format must be [int8 | int16 | int32 | float16 | float32 | float64]')          
             
     #Set the output type
     if args.tone != None:    
@@ -151,7 +153,12 @@ if __name__ == '__main__':
         output = complexToSingleArray(output, not args.orderQI).astype(np.int32)
     elif args.format == 'int8':
         output = complexToSingleArray(output, not args.orderQI).astype(np.int8) 
-    
+    elif args.format == 'float16':
+        output = complexToSingleArray(output, not args.orderQI).astype(np.float16) 
+    elif args.format == 'float32':
+        output = complexToSingleArray(output, not args.orderQI).astype(np.float32) 
+    elif args.format == 'float64':
+        output = complexToSingleArray(output, not args.orderQI).astype(np.float64)     
     #Add the data format to the filename
     filename += '_' + str(args.format) 
         
